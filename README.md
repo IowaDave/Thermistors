@@ -281,7 +281,7 @@ Golly gee it felt funny to be back in 9th grade algebra class!
 ### Calculating Resistance from the ADC Measurement
 We combine two equations.
 
-* Equation #1 Output of a Voltage Divider, $V_O$
+#### Equation #1 Output of a Voltage Divider, $V_O$
 
 ```math
 V_O = V_I \times \frac{R2}{R1 + R2}
@@ -290,7 +290,7 @@ where: <br>
 &nbsp;&nbsp; $V_I$ is the voltage fed into Resistor R1 <br>
 &nbsp;&nbsp; R2 is the resistor following R1 in series, terminating at ground. 
 
-* Equation #2 ADC Measurement, $M_{ADC}$
+#### Equation #2 ADC Measurement, $M_{ADC}$
 
 ```math
 M_{ADC} = 1023 \times \frac{V_O}{V_I}
