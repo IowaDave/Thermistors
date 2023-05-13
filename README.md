@@ -107,8 +107,8 @@ The output of the voltage divider is led to an analog input pin on the Arduino. 
 M_{ADC} = 1023 \times  \frac{V_O}{V_I}
 ```
 where:<br>
-&nbsp;&nbsp;$V_I$ is the input voltage applied to the thermistor, the same voltage that also powers the MCU.<br>
-&nbsp;&nbsp;$V_O$ is the output voltage at the junction of $R1$ with $R2$.
+&nbsp;&nbsp; $V_I$ is the input voltage applied to the thermistor, the same voltage that also powers the MCU.<br>
+&nbsp;&nbsp; $V_O$ is the output voltage at the junction of $R1$ with $R2$.
 
 This measurement, $0 <= M_{ADC} <= 1023$, can be reinterpreted as the output voltage, $V_O$. However, we do not really need to know the voltage. We need only to know the resistance in the thermistor. 
 
