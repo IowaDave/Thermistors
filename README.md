@@ -18,7 +18,7 @@ I target my example project to the range of outside air temperatures likely to b
 #### [Simple Usage](#simple-usage)
 #### [A Better Approach?](#a-better-approach?)
 #### [The Characteristic Curve](#the-characteristic-curve)
-#### [Wonky Calculations](#wonky-calculations)
+#### [Wonky Calculations](#wonky-calculations-1)
 #### [Links](#links)
 
 ## Introduction
@@ -94,7 +94,7 @@ The best a single number can do, such as the Beta in Table 1, is to approximate 
 
 There are ways to approach a temperature estimate using data from Table 2 that may come closer. I used a different value for Beta in my project, 3936, for reasons described below in [The Characteristic Curve](#the-characteristic-curve) section.
 
-The math for this project triggered a flashback to 9th grade algebra. If you really must see it, visit the [Wonky Calculations](#wonky-calculations) section at the end of this article.
+The math for this project triggered a flashback to 9th grade algebra. If you really must see it, visit the [Wonky Calculations](#wonky-calculations-1) section at the end of this article.
 
 ## The Code
 
