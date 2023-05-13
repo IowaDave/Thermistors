@@ -271,9 +271,9 @@ See also the following link, which even provides an online calculator:
 
 [https://www.ametherm.com/thermistor/ntc-thermistors-steinhart-and-hart-equation](https://www.ametherm.com/thermistor/ntc-thermistors-steinhart-and-hart-equation)
 
-Some of the github libraries listed below among the [Links](#links) implement the Steinhart-Hart equation. One of them will even calculate the coefficients for you!
+Some of the github libraries listed below among the [Links](#links) implement the Steinhart-Hart equation. One of them might even calculate the coefficients for you!
 
-A unique benefit of the Steinhart-Hart equation is that it can be used with thermistors for which no data sheet is available. One simply measures actual resistance of the thermistor at three different temperatures, spaced evenly at intervals reasonably far apart. The measurements allow a set of coefficients to be calculated for that thermistor.
+A unique benefit of the Steinhart-Hart equation is that it can be used with thermistors for which no data sheet is available. One carefully measures actual resistance of the thermistor at three different temperatures, spaced evenly at intervals reasonably far apart. The measurements allow a set of coefficients to be calculated for that thermistor.
 
 ## Wonky Calculations
 Golly gee it felt funny to be back in 9th grade algebra class!
