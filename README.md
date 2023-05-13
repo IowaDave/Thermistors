@@ -7,7 +7,7 @@ This article puts a 39-cent thermistor to work as a digital thermometer. It need
 
 I target my example project to the range of outside air temperatures likely to be encountered during April and May in the upper midwestern U.S., &ndash;10&#8451; to 30&#8451;. This target will shape the code development.
 
-*Note to Readers: draft of 10 May 2023, a work in progress. Expect changes. Today I frown at what I've written. Too many words, littered about like toys a toddler didn't put away. Seriously considering deleting the whole thing.*  
+*Note to Readers: draft of 10 May 2023, a work in progress. Expect changes. Today I frown at what I've written. Too many words, littered about like toys a truculent toddler didn't put away. Seriously considering deleting the whole thing.*  
 
 ## Contents
 
