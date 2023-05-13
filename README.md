@@ -1,7 +1,7 @@
 # Thermistor-Thermometer
 Build an accurate digital thermometer with a simple, inexpensive sensor.
 
-![Thermistor with Arduino Nano](https://github.com/IowaDave/Thermistor-Thermometer/blob/main/images/Thermistor.jpg)
+![Thermistor with Arduino Nano](https://github.com/IowaDave/Thermistors/blob/main/images/Thermistor.jpg)
 
 This article puts a 39-cent thermistor to work as a digital thermometer. It needs just a few lines of code.
 
@@ -47,7 +47,7 @@ This article reviews the least challenging approach to a reasonably useful resul
 
 ## The Circuit
 
-![Schematic](https://github.com/IowaDave/Thermistor-Thermometer/blob/main/images/schematic.svg)
+![Schematic](https://github.com/IowaDave/Thermistors/blob/main/images/schematic.svg)
 
 The input voltage, ```Vcc```, is supplied to both the MCU and the voltage divider. The MCU will use this voltage as the ADC reference. The voltage divider will supply a reduced voltage to the analog input pin marked ```A0```. The MCU and the voltage divider share a common ground.
 
@@ -63,7 +63,7 @@ There are many different thermistors having widely varying specifications. The i
 
 At a minimum, one needs to know the Big Three quantities about a thermistor. The following excerpt provides them for the LM05-103.
 
-![Data Sheet excerpt #1](https://github.com/IowaDave/Thermistor-Thermometer/blob/main/images/DS_table_1.png)<br>
+![Data Sheet excerpt #1](https://github.com/IowaDave/Thermistors/blob/main/images/DS_table_1.png)<br>
 **Table 1 Reference Values and Beta**
 
 The first line gives two of the quantities: a nominal impedance of 10K Ohms at a temperature of 25 degrees Celsius. &ldquo;Nominal&rdquo; means &ldquo;intended&rdquo;. 
@@ -85,7 +85,7 @@ See the example program that accompanies a "Thermistor" library in the following
 
 This article does not use a library like that, for two reasons. Firstly, the code is really short. Secondly, a good data sheet will provide more complete information that may support better accuracy across a wider range of temperatures. The following shows part of a table for the LM05-103.
 
-![Data Sheet excerpt #2](https://github.com/IowaDave/Thermistor-Thermometer/blob/main/images/DS_table_2.png)<br>
+![Data Sheet excerpt #2](https://github.com/IowaDave/Thermistors/blob/main/images/DS_table_2.png)<br>
 **Table 2 Resistance at Different Temperatures**
 
 Look twice at Table 2. The values for resistance follow a curve, rather than a straight slope. The numbers change by different amounts from one temperature to the next. Going down ten degrees from 30&#8451; to 20&#8451; the resistance increases by about 2,500 Ohms, from 20&#8451; down to 10&#8451; by almost 8,700 Ohms, from 10&#8451; down to 0&#8451; by more than 13,000 Ohms, and so forth.
@@ -199,7 +199,7 @@ Notice that the Beta value given in Table 1 relates to the range of temperatures
 
 The graph in Figure 1 illustrates the limitations of using that value of Beta.
 
-![Characteristic Curve Graph](https://github.com/IowaDave/Thermistor-Thermometer/blob/main/images/teamwavelength-log-graph-with-beta.png)<br>
+![Characteristic Curve Graph](https://github.com/IowaDave/Thermistors/blob/main/images/teamwavelength-log-graph-with-beta.png)<br>
 **Figure 1 A Characteristic Curve Showing Beta 25&#8451;/50&#8451;**<br>
 *Modified from image source [https://www.teamwavelength.com/thermistor-basics/](https://www.teamwavelength.com/thermistor-basics/) to add Beta line.*
 
