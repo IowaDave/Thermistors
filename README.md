@@ -19,10 +19,10 @@ I target my example project to the range of outside air temperatures likely to b
 #### [A Better Approach?](#a-better-approach?)
 #### [The Characteristic Curve](#the-characteristic-curve)
 #### [Wonky Calculations](#wonky-calculations-1)
-#### [Links](#links)
+#### [Links](#links-1)
 
 ## Introduction
-Thermistors have been explained and demonstrated abundantly for temperature measurement. This writer has reviewed seven Arduino-style libraries. See the [links](#links) provided below.
+Thermistors have been explained and demonstrated abundantly for temperature measurement. This writer has reviewed seven Arduino-style libraries. See the [links](#links-1) provided below.
 
 A reader can stop right there and go find how-tos online. Or stay here and go into it a little farther with me. 
 
@@ -263,7 +263,7 @@ Some data sheets in the past would publish those coefficients. They don't seem t
 
 Calculating the coefficients begins with values for three different temperature/resistance points.
 
-Here I shall revert to my better behavior and obey the Law of the Forum. The math for finding the coefficients really has been well described elsewhere. See: 
+The math for finding the coefficients has been well described elsewhere. See: 
 
 [https://en.wikipedia.org/wiki/Steinhart%E2%80%93Hart_equation](https://en.wikipedia.org/wiki/Steinhart%E2%80%93Hart_equation)
 
@@ -271,7 +271,7 @@ See also the following link, which even provides an online calculator:
 
 [https://www.ametherm.com/thermistor/ntc-thermistors-steinhart-and-hart-equation](https://www.ametherm.com/thermistor/ntc-thermistors-steinhart-and-hart-equation)
 
-Some of the github libraries listed below among the [Links](#links) implement the Steinhart-Hart equation. One of them might even calculate the coefficients for you!
+Some of the github libraries listed below among the [Links](#links-1) implement the Steinhart-Hart equation. One of them might even calculate the coefficients for you!
 
 A unique benefit of the Steinhart-Hart equation is that it can be used with thermistors for which no data sheet is available. One carefully measures actual resistance of the thermistor at three different temperatures, spaced evenly at intervals reasonably far apart. The measurements allow a set of coefficients to be calculated for that thermistor.
 
