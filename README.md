@@ -31,7 +31,7 @@ Still with me? Here I go. How does one measure a temperature using a thermistor?
 I'm curious to know more than merely how to cobble together an apparatus: how does it work, and what's a good trade-off between accuracy and code?
 
 ## How It Works
-A thermistor is a kind of resistor having a special property: its resistance varies with highsensetiviy to changes in temperature.
+A thermistor is a kind of resistor having a special property: its resistance varies with highsensitiviy to changes in temperature.
 
 Pairing a thermistor with a fixed-value resistor gives a voltage divider. For a certain, constant voltage input, $V_I$, the voltage output, $V_O$, increases or decreases in response to a decrease or increase in temperature.
 
