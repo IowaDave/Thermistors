@@ -7,7 +7,7 @@ This article puts a 39-cent thermistor to work as a digital thermometer. It need
 
 I target my example project to the range of outside air temperatures likely to be encountered during April and May in the upper midwestern U.S., &ndash;10&#8451; to 30&#8451;. This target will shape the code development.
 
-*Note to Readers: draft of 10 May 2023, a work in progress. Expect changes. Today I frown at what I've written. Too many words, littered about like toys a truculent toddler didn't put away. Seriously considering deleting the whole thing.*  
+*Note to Readers: draft of 13 May 2023, a work in progress. Expect changes. Today I frown at what I've written. So many words, littered about like toys a truculent toddler didn't put away. Seriously considering deleting the whole thing. Maybe I won't.*  
 
 ## Contents
 
@@ -31,7 +31,7 @@ Still with me? Here I go. How does one measure a temperature using a thermistor?
 I'm curious to know more than merely how to cobble together an apparatus: how does it work, and what's a good trade-off between accuracy and code?
 
 ## How It Works
-A thermistor is a kind of resistor having a special property: its resistance varies with highsensitiviy to changes in temperature.
+A thermistor is a kind of resistor having a special property: its resistance varies with high sensitiviy to changes in temperature.
 
 Pairing a thermistor with a fixed-value resistor gives a voltage divider. For a certain, constant voltage input, $V_I$, the voltage output, $V_O$, increases or decreases in response to a decrease or increase in temperature.
 
@@ -53,20 +53,21 @@ This article presents the least challenging approach to a reasonably useful resu
 
 The input voltage, ```Vcc```, is supplied to both the MCU and the voltage divider. The MCU will use this voltage as the ADC reference. The voltage divider will supply a reduced voltage to the analog input pin marked ```A0```. The MCU and the voltage divider share a common ground.
 
-$R1$ in the diagram is the thermistor. The project described here used a Jameco LM05-103 K part. In the photo it appears in the upper-right quadrant, a red disc on two, tall leads.
+$R1$ in the diagram is the thermistor. The project described here used a Jameco LM05-103&nbsp;K part. In the photo it appears in the upper-right quadrant, a red disc on two, tall leads.
 
 $R2$ is a fixed-impedence resistor. The example project uses one having impedance of 30K Ohms. This value was selected after studying the data sheet for the LM05-103 thermistor.
 
 ## Data Sheet Information
 
-Here is a link to the Jameco LM05-103 K part used in this project: [https://www.jameco.com/Jameco/Products/ProdDS/207037.pdf](https://www.jameco.com/Jameco/Products/ProdDS/207037.pdf).
+Here is a link to the Jameco LM05-103&nbsp;K part used in this project: [https://www.jameco.com/Jameco/Products/ProdDS/207037.pdf](https://www.jameco.com/Jameco/Products/ProdDS/207037.pdf).
 
 There are many different thermistors having widely varying specifications. The information needed to use a particular thermistor is found in its manufacturer's data sheet. 
 
 At a minimum, one needs to know the Big Three quantities about a thermistor. The following excerpt provides them for the LM05-103.
 
 ![Data Sheet excerpt #1](https://github.com/IowaDave/Thermistors/blob/main/images/DS_table_1.png)<br>
-**Table 1 Reference Values and Beta**
+**Table 1 Reference Values and Beta**<br>
+*Source: LM05-103&nbsp;K data sheet*
 
 The first line gives two of the quantities: a nominal impedance of 10K Ohms at a temperature of 25 degrees Celsius. &ldquo;Nominal&rdquo; means &ldquo;intended&rdquo;. 
 
@@ -74,7 +75,7 @@ The third line gives the third quantity. It states that something called &ldquo;
 
 A reference temperature, resistance at that temperature and the relevant Beta value are enough information to calculate a temperature with some of the more rudimentary open-source thermistor libraries available for the Arduino IDE. 
 
-By the way, the second line of Table 1 discloses that the actual resistance may be different, by as much as 10% above or below the intended level. In this case, it could be as low as 10K &ndash; 10% = 9,000 Ohms or as high as 10K + 10% = 11,000 Ohms. They are being honest here.
+By the way, the second line of Table 1 discloses that the actual resistance may be different, by as much as 10% above or below the intended level. In this case, it could be as low as 10K &ndash; 10% = 9,000 Ohms or as high as 10K + 10% = 11,000 Ohms. The Jameco folks are being honest here.
 
 Thermistors accurate to within 1% are available at higher prices. However, I found the inexpensive LM05-103 sufficiently accurate for my purposes. Component selection is one of the decisions that a project designer gets to make.
 
@@ -88,7 +89,8 @@ See the example program that accompanies a "Thermistor" library in the following
 This article does not use a library like that, for two reasons. Firstly, the code is really short. Secondly, a good data sheet will provide more complete information that may support better accuracy across a wider range of temperatures. The following shows part of a table for the LM05-103.
 
 ![Data Sheet excerpt #2](https://github.com/IowaDave/Thermistors/blob/main/images/DS_table_2.png)<br>
-**Table 2 Resistance at Different Temperatures**
+**Table 2 Resistance at Different Temperatures**<br>
+*Source: LM05-103&nbsp;K data sheet*
 
 Look twice at Table 2. The values for resistance follow a curve, rather than a straight slope. The numbers change by different amounts from one temperature to the next. Going down ten degrees from 30&#8451; to 20&#8451; the resistance increases by about 2,500 Ohms, from 20&#8451; down to 10&#8451; by almost 8,700 Ohms, from 10&#8451; down to 0&#8451; by more than 13,000 Ohms, and so forth.
 
@@ -259,7 +261,7 @@ The Steinhart-Hart equation actually skips the Beta. It takes the measured resis
 
 All you need to know in advance are the three coefficients, ```A```, ```B``` and ```C```.
 
-Some data sheets in the past would publish those coefficients. They don't seem to nowadays. However, they do published tables like Table 2, above, and coefficients can be calculated using data found there.
+Some data sheets in the past would publish those coefficients. They don't seem to nowadays. However, they do typically provide tables like Table 2, above, and coefficients can be calculated using data found there.
 
 Calculating the coefficients begins with values for three different temperature/resistance points.
 
