@@ -164,8 +164,6 @@ Keep in mind that the temperatures need to be in degrees Kelvin, where 0&#8451; 
  + \frac{ln(R_{TEMP})}{3936}
 ```
 
-Invert the result then subtract 273.15 to arrive at the temperature in degrees Celsius.
-
 Again, the calculation consumes just one code statement
 
 ```
@@ -180,6 +178,8 @@ Again, the calculation consumes just one code statement
   );
 ```
 
+Invert the result then subtract 273.15 to arrive at the temperature in degrees Celsius.
+
 ## The Characteristic Curve
 
 Table 2 helps us to understand that business about &ldquo;25&#8451;/50&#8451;&rdquo; in Table 1. The Beta value given there, 4038, was calculated using data from resistances at the temperatures 25&#8451; and 50&#8451;. The calculation was:
@@ -193,9 +193,13 @@ The temperatures need to be converted to the Kelvin scale by adding 273.15. Subs
 \beta =  \frac{\ln\left(\frac{10000}{3507}\right)}{\frac{1}{298.15} - \frac{1}{323.15}} \approx 4038
 ```
 
-The formula for deriving the Beta can be rearranged to estimate temperatures. It works by interpolating between two data points.
+The formula for deriving the Beta can be rearranged to estimate temperatures. It works by interpolating along a straight line that passes through two data points.
 
-The Characteristic Curve of a thermistor bends in such a way that a Beta value comes closest for resistance values between the two data points that were used to compute the Beta.
+A graph of the Characteristic Curve of a thermistor plots the resistance at each temperature. The plot of actual resistance follows a curve. This means the resistance value found on the straight &ldquo;Beta&rdquo; line will not be exactly right. It is only an estimate. 
+
+Figure 1 illustrates the gap between the Beta line estimates and the actual values found on the Characteristic Curve.
+
+The Curve bends in such a way that a Beta value comes closest for resistance values between the two data points that were used to compute the Beta.
 
 Notice that the Beta value given in Table 1 relates to the range of temperatures 25&#8451; to 50&#8451;. 
 
@@ -205,7 +209,7 @@ The graph in Figure 1 illustrates the limitations of using those two data points
 **Figure 1 A Characteristic Curve Showing Beta 25&#8451;/50&#8451;**<br>
 *Modified from image source [https://www.teamwavelength.com/thermistor-basics/](https://www.teamwavelength.com/thermistor-basics/) to add Beta line.*
 
-The Beta value enables approximation by interpolation along a straight line that passes through the two end-points used to calculate it. This line stays reasonably close to the curve between the two points but diverges from it above or below the points.
+The Beta line stays reasonably close to the curve between the two points but diverges from it at temperatures above or below the points.
 
 It's easy to see in Figure 1 that a different set of end points is likely to be more suitable for a colder range of temperatures. While the particular values depicted in Figure 1 are not those for the thermistor used in my project, the concept is the same.
 
