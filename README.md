@@ -195,11 +195,11 @@ The temperatures need to be converted to the Kelvin scale by adding 273.15. Subs
 
 The formula for deriving the Beta can be rearranged to estimate temperatures. It works by interpolating along a straight line that passes through two data points.
 
-A graph of the Characteristic Curve of a thermistor plots the resistance at each temperature. The plot of actual resistance follows a curve. This means the resistance value found on the straight &ldquo;Beta&rdquo; line will not be exactly right. It is only an estimate. 
+Figure 1 illustrates a Characteristic Curve of a thermistor. It plots the actual resistance at each temperature. The plot follows a curve. This means the resistance value found on the straight &ldquo;Beta&rdquo; line will not be exactly right. It is only an estimate. 
 
 Figure 1 illustrates the gap between the Beta line estimates and the actual values found on the Characteristic Curve.
 
-The Curve bends in such a way that a Beta value comes closest for resistance values between the two data points that were used to compute the Beta.
+The Curve bends in such a way that estimating with Beta comes closest for resistance values between the two data points that were used to compute the Beta.
 
 Notice that the Beta value given in Table 1 relates to the range of temperatures 25&#8451; to 50&#8451;. 
 
@@ -211,21 +211,21 @@ The graph in Figure 1 illustrates the limitations of using those two data points
 
 The Beta line stays reasonably close to the curve between the two points but diverges from it at temperatures above or below the points.
 
-It's easy to see in Figure 1 that a different set of end points is likely to be more suitable for a colder range of temperatures. While the particular values depicted in Figure 1 are not those for the thermistor used in my project, the concept is the same.
+It's easy to see in Figure 1 that a different set of end points could be more suitable for a colder range of temperatures. While the particular values depicted in Figure 1 are not those for the thermistor used in my project, the concept still applies.
 
-The example code targets a different range, temperatures likely to be encountered during April and May in the upper Midwestern U.S.: &ndash;0&#8451; to +30&#8451;.  The Beta for that range turned out to be 3936, based on the relevant values from Table 2.
+The example code targets the range of temperatures likely to be encountered during April and May in the upper Midwestern U.S.: &ndash;0&#8451; to +30&#8451;.  The Beta for that range turned out to be 3936, calculated from the relevant values in Table 2.
 
 ```math
 \beta =  \frac{\ln\left(\frac{57670}{8013}\right)}{\frac{1}{263.15} - \frac{1}{303.15}} \approx 3936
 ```
 
-Similarly, a Beta for a winter range of &ndash;30&#8451; to +10&#8451; works out to be 3830. If one is going to use Beta for calculating a temperature estimate within a certain target range, then why not determine a Beta value to fit that range?
+Similarly, a Beta for a winter range of &ndash;30&#8451; to +10&#8451; works out to be 3830. If one is going to use Beta for estimating a temperature within a certain target range, then why not work with the Beta value for that range?
 
-I found that customizing the  Beta and reference inputs as described above worked well enough for my purposes. The thermistor reported temperatures within a degree or two more or less compared to other thermometers in my house. It's close enough to tell me whether I might want to wear a jacket outdoors.
+I found that customizing the Beta and reference inputs as described above worked well enough for my purposes. The thermistor reported temperatures within a degree or two more or less compared to other thermometers in my house. It's close enough to tell me whether I might want to wear a jacket outdoors.
 
 I mean, I'm a sensitive guy, but be reasonable. We're spending 39 cents here. Heck, all of my other thermometers give slightly different readings anyway.
 
-An old saying goes, "With one thermometer, one always knows what the temperature is. With two or more, one never does."
+An old saying goes, "One thermometer always knows what the temperature is. Two or more, never do."
 
 <hr>
 
