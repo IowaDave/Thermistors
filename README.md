@@ -113,7 +113,7 @@ where:<br>
 This measurement, $0 <= M_{ADC} <= 1023$, can be reinterpreted as the output voltage, $V_O$. However, we do not really need to know the voltage. We need only to know the resistance in the thermistor. 
 
 ### Infer a Resistance
-First make sure that the voltage applied to the voltage divider, $V_I$ is the same as that powering the microcontroller. Then the ADC measurement can be converted directly into the resistance of the thermistor, knowing the values of $M_{ADC} and of the fixed-value resistor that follows it in series.
+First make sure that the voltage applied to the voltage divider, $V_I$ is the same as that powering the microcontroller. Then the ADC measurement can be converted directly into the resistance of the thermistor, knowing the values of $M_{ADC}$ and of the fixed-value resistor that follows it in series.
 
 With the thermistor in the $R1$ position of the voltage divider, the following equation solves for its resistance:
 
