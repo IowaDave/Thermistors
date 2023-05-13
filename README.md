@@ -37,13 +37,15 @@ Pairing a thermistor with a fixed-value resistor gives a voltage divider. For a 
 
 Code can evaluate the voltage output using the analog-to-digital converter (ADC) peripheral in a microcontroller. The value returned by the ADC can be interpreted as the resistance value in the thermistor. 
 
+The resistance, by the nature of the materials in the thermistor, corresponds predictably to a temperature with remarkable precision.
+
 However...
 
 The change of resistance for a given change of temperature is not linear. This poses a challenge for code writers seeking to determine the temperature that corresponds to the measured resistance.  
 
 There is more than one way to go about it. Accuracy of the temperature may be influenced by the method applied to interpret the ADC reading.
 
-This article reviews the least challenging approach to a reasonably useful result. Then it goes on to examine other methods that may be worth the effort in situations calling for greater accuracy.
+This article presents the least challenging approach to a reasonably useful result. Then it goes on to examine other methods that may be worth the effort in situations calling for greater accuracy.
 
 ## The Circuit
 
