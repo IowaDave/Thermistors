@@ -140,13 +140,13 @@ R2 = \frac{M_{ADC} \times R1}{1023 - M_{ADC}}
 where $M_{ADC} < 1023$
 
 ### Calculate a Temperature
-The example code operates wityh a different set of Big Three constants as follows:
+The example code operates with a customized set of Big Three constants, for reasons explained below. Their values are:
 
 1. $T_{REF}$, the selected reference temperature, &ndash;10&#8451;,
 2. $R_{REF}$, the resistance at the reference temperature, 57670 Ohms, from Table 2,
 3. Beta, calculated to be 3936 for the range &ndash;10&#8451; to 30&#8451;,
 
-It calculates a temperature $T_{TEMP}$ from the measured resistance, $R_{TEMP}$, as follows. 
+The temperature $T_{TEMP}$ being sensed by the thermistor is calculated from the measured resistance, $R_{TEMP}$, as follows. 
 
 ```math
 \frac{1}{T_{TEMP}} = \left(\frac{1}{T_{REF}} 
@@ -197,7 +197,7 @@ The Characteristic Curve of a thermistor bends in such a way that a Beta value c
 
 Notice that the Beta value given in Table 1 relates to the range of temperatures 25&#8451; to 50&#8451;. 
 
-The graph in Figure 1 illustrates the limitations of using that value of Beta.
+The graph in Figure 1 illustrates the limitations of using those two data points to calculate a value for Beta.
 
 ![Characteristic Curve Graph](https://github.com/IowaDave/Thermistors/blob/main/images/teamwavelength-log-graph-with-beta.png)<br>
 **Figure 1 A Characteristic Curve Showing Beta 25&#8451;/50&#8451;**<br>
@@ -205,9 +205,9 @@ The graph in Figure 1 illustrates the limitations of using that value of Beta.
 
 The Beta value enables approximation by interpolation along a straight line that passes through the two end-points used to calculate it. This line stays reasonably close to the curve between the two points but diverges from it above or below the points.
 
-It's easy to see in Figure 1 that a different set of end points would be more suitable for a colder range of temperatures. While the particular values depicted in Figure 1 are not those for the thermistor used in my project, the concept is the same.
+It's easy to see in Figure 1 that a different set of end points is likely to be more suitable for a colder range of temperatures. While the particular values depicted in Figure 1 are not those for the thermistor used in my project, the concept is the same.
 
-The example code targets a different range, temperatures likely to be encountered during April and May in the upper Midwestern U.S.: &ndash0&#8451; to +30&#8451;.  The Beta for that range turned out to be 3936, based on the relevant values from Table 2.
+The example code targets a different range, temperatures likely to be encountered during April and May in the upper Midwestern U.S.: &ndash;0&#8451; to +30&#8451;.  The Beta for that range turned out to be 3936, based on the relevant values from Table 2.
 
 ```math
 \beta =  \frac{\ln\left(\frac{57670}{8013}\right)}{\frac{1}{263.15} - \frac{1}{303.15}} \approx 3936
@@ -327,7 +327,7 @@ R1 = R2 \times \left(\frac{1023}{M_{ADC}} - 1\right)
 ```
 
 ### Calculating Temperature from Resistance Using Beta
-The formula for Beta takes two selected (temperature, resistance) data points taken from the data sheet.
+The formula for Beta takes two selected (temperature, resistance) data points from the data sheet.
 
 ```math
 \beta = \frac{\ln\frac{R_{REF}}{R_{TEMP}}}{\frac{1}{T_{REF}} - \frac{1}{T_{TEMP}}}
@@ -335,7 +335,7 @@ The formula for Beta takes two selected (temperature, resistance) data points ta
 where:
 
 * $R_{REF}$ is the resistance at a chosen base temperature, $T_{REF}$.
-* $R_{TEMP}$ is the resistance at a temperature $T{TEMP}$ greater than the base
+* $R_{TEMP}$ is the resistance at a temperature $T_{TEMP}$ greater than the base
 
 Note that with NTC thermistors the resistance increases as the temperature decreases, and vice versa.
 
@@ -359,7 +359,7 @@ Note that in C++ the natural logarithm $\ln()$ is coded as ```log()```.
 
 
 ## Links
-During April and May 2023 I looked at least briefly at some of the contents accessed on the following URLs. No attempt was made to verify the contents. Information found online, including this article, may contain errors and can change. I list the links for solely as an aid to memory.
+During April and May 2023 I looked at least briefly at some of the contents accessed on the following URLs. No attempt was made to verify the contents. Information found online, including this article, may contain errors and can change. I list the links solely as an aid to memory.
 
 ### Github Repositories
 
