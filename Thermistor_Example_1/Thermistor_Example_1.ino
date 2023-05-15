@@ -43,10 +43,13 @@ char vbgString[12];       // to format floating-point output
 double getTempK (void);
 double getTempC (void);
 double getTempF (void);
-int16_t readAnalogPin( uint8_t );
+uint16_t readAnalogPin( uint8_t );
 
 void setup() {
+
+  delay(2000); 
   Serial.begin(9600);
+  while (!Serial) { ; }
   Serial.println("Serial started.");
 }
 
@@ -57,30 +60,32 @@ void loop() {
 }
 
 
-int16_t readAnalogPin( uint8_t pin)
+uint16_t readAnalogPin( uint8_t pin)
 {
-  int16_t adcAverage = 1024;
+  #define NUM_SAMPLES 10
+  uint16_t adcAverage = 0;
   pinMode(pin, INPUT);
-  for (int i = 1; i < 11; i++)
+  for (int i = 0; i < NUM_SAMPLES; i++)
   {
-    adcAverage = adcAverage + (analogRead(pin) - adcAverage)/i;
+    adcAverage += analogRead(pin);
     delay(5);
   }
 //  Serial.println(adcAverage);
-  return adcAverage;
+  return adcAverage / NUM_SAMPLES;
 }
 
 double getTempK ()
 {
-  double temp =
+  double temp = // a scratchpad variable
   ( 
     (1023.0 / readAnalogPin ( ANALOG_INPUT ) )
      - 1)
-    * R_FIXED; // resistance in the thermistor
+    * R_FIXED; // begin with resistance in the thermistor
     
 //  Serial.print("Resistance: ");
 //  Serial.println(temp);   
-  temp = 
+
+  temp = // temperature derived from resistance
   ( 
     1 / 
     ( (1.0/REF_TEMP) - log(REF_RESIST/temp)/BETA )
