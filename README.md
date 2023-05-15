@@ -28,7 +28,7 @@ A reader can stop right there and go find how-tos online. Or stay here and go in
 
 Still with me? Here I go. How does one measure a temperature *accurately* using a thermistor?
 
-I'm curious to know more than merely how to cobble together an apparatus: how does a thermistor work, and how can one be calibrated to approach accuracy?
+I'm curious to know more than merely how to cobble together an apparatus: how does a thermistor work, and how can one be calibrated to obtain reasonable accuracy?
 
 ## How It Works
 A thermistor is a kind of resistor having a special property: its resistance varies with high sensitiviy to changes in temperature.
@@ -88,6 +88,8 @@ See the example program that accompanies a "Thermistor" library in the following
 
 **Know Your Thermistor!** That library expects the user to wire up an "NTC" type of thermistor that was designed for temperature measurement. (Those designed to deal with "inrush current" may be less suitable.) Wiring should follow the circuit diagram shown above. Finally, the code writer must supply the reference values given in the manufacturer's data sheet for the device being used.
 
+Using such a library with a particular thermistor, given only the Big Three quantities from the data sheet, or (worse) from a product description on a mass-merchant's web site, will give a result that *looks like* a temperature. (He shrugs.) It's a place to start.
+
 ## A Better Approach?
 
 This article does not use a library like that, for two reasons. Firstly, the code is really short. Secondly, a good data sheet will provide more complete information that may promote better accuracy. The following shows part of such a table for the LM05-103.
@@ -106,7 +108,7 @@ The math for this project triggered a flashback to 9th grade algebra. If you rea
 
 ## The Code
 
-The example code defines the relevant constants. Then, just two code statements do all the work. They are found in the subroutine named ```getTempK()```.
+The example code incorporates a set of Big Three constants calculated beforehand. Then, just two code statements do the work. They are found in the subroutine named ```getTempK()```.
 
 ### Assess the Output of the Voltage Divider
 The output of the voltage divider is led to an analog input pin on the Arduino. The ```analogRead()``` function activates the analog-to-digital converter (ADC) peripheral inside the microcontroller to measure the voltage as a number between 0 and 1023. The following defines the ADC measurement, $M_{ADC}$ 
@@ -189,7 +191,7 @@ Invert the result then subtract 273.15 to arrive at the temperature in degrees C
 ### Calibrate to Improve the Accuracy
 OK, now we're reading a temperature from our apparatus. How close is it to the expected value?
 
-For example, the one in the photo reported 73.2&deg;F when my room temperature was 70&deg;F. The difference was 3.2&deg;, equal to about 1.77&degC. 
+For example, the one in the photo reported 73.2&deg;F when my room temperature was 70&deg;F. The difference was 3.2&deg;F. 
 
 One way to resolve this discrepancy is to calibrate the resistance value before calculating the temperature. 
 
@@ -197,9 +199,9 @@ A short narrative can describe the general idea and yield a good approximation.
 
 Look at Table 2 again. 70&deg;F is near 21&deg;C. At 25&deg;C we expect to see a resistance of 10,000 Ohms. At 20&deg;C it rises to 12,560 Ohms, an increase of about 500 Ohms per degree of *decrease* in temperature.
 
-So, at 70&deg;F the resistance would be near $12,560 - 500 \approx 12,000$ Ohms. What does our voltage divider tell us? Print it out. The apparatus in the photo reported about 11,200 Ohms.
+So, at 70&deg;F the resistance would be near $12,560 - 600 \approx 12,000$ Ohms. What does our voltage divider tell us? Print it out. The apparatus in the photo reported about 11,200 Ohms.
 
-The expected resistance of 12,000 is about 1.07 times the measured value of 11,200 near 70&deg;F. $\frac{12000}{11200}  \approx 1.07$. 
+The expected resistance of 12,000 is about 1.07 times the measured value of 11,200 near 70&deg;F because $\frac{12000}{11200}  \approx 1.07$. 
 
 Calibration is now simple: multiply the measured resistance times the ratio computed *for this particular thermistor*, 1.07. Insert this step to adjust the resistance value before calculating the temperature.
 
