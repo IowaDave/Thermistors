@@ -34,7 +34,7 @@
 #define REF_RESIST  57670  // Ohms
 #define BETA        3936 // 3936 for -10 to 30
 
-// Fixed Resistor in series with the thermistor
+// Fixed Resistor in series after the thermistor
 #define R_FIXED     30000 // Ohms 
 
 char vbgString[12];       // to format floating-point output
@@ -82,8 +82,12 @@ double getTempK ()
      - 1)
     * R_FIXED; // begin with resistance in the thermistor
     
-//  Serial.print("Resistance: ");
-//  Serial.println(temp);   
+  Serial.print("Resistance: ");
+  Serial.println(temp);   
+
+// Device error could be as much as 10% above or below.
+// Adjust for a measured resistance 6% below actual.
+   temp *= 1.07; // apply correction factor
 
   temp = // temperature derived from resistance
   ( 

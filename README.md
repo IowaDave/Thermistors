@@ -7,7 +7,7 @@ This article puts a 39-cent thermistor to work as a digital thermometer. It need
 
 I target my example project to the range of outside air temperatures likely to be encountered during April and May in the upper midwestern U.S., &ndash;10&#8451; to 30&#8451;. This target will shape the code development.
 
-*Note to Readers: draft of 13 May 2023, a work in progress. Expect changes. Today I frown at what I've written. So many words, littered about like toys a truculent toddler didn't put away. Seriously considering deleting the whole thing. Maybe I won't.*  
+*Note to Readers: draft of 15 May 2023, a work in progress. Expect changes.
 
 ## Contents
 
@@ -26,9 +26,9 @@ Thermistors have been explained and demonstrated abundantly for temperature meas
 
 A reader can stop right there and go find how-tos online. Or stay here and go into it a little farther with me. 
 
-Still with me? Here I go. How does one measure a temperature using a thermistor?
+Still with me? Here I go. How does one measure a temperature *accurately* using a thermistor?
 
-I'm curious to know more than merely how to cobble together an apparatus: how does it work, and what's a good trade-off between accuracy and code?
+I'm curious to know more than merely how to cobble together an apparatus: how does a thermistor work, and how can one be calibrated to approach accuracy?
 
 ## How It Works
 A thermistor is a kind of resistor having a special property: its resistance varies with high sensitiviy to changes in temperature.
@@ -77,7 +77,11 @@ A reference temperature, resistance at that temperature and the relevant Beta va
 
 By the way, the second line of Table 1 discloses that the actual resistance may be different, by as much as 10% above or below the intended level. In this case, it could be as low as 10K &ndash; 10% = 9,000 Ohms or as high as 10K + 10% = 11,000 Ohms. The Jameco folks are being honest here.
 
-Thermistors accurate to within 1% are available at higher prices. However, I found the inexpensive LM05-103 sufficiently accurate for my purposes. Component selection is one of the decisions that a project designer gets to make.
+That works out to accuracy within about 4 degrees at room temperature. There are two ways to improve it.
+
+Thermistors accurate to within 1% are available at higher prices. Now you're talking accuracy to within a half of a degree or less. Maybe the extra cost makes sense if you are mass-producing digital thermometers and wish to omit testing each part.
+
+Fortunately for us hobbyists who build things one at a time, it is easy to calibrate a single, inexpensive thermistor. How to do this will be explained below, in [The Code](#the-code) section.
 
 ## Simple Usage
 See the example program that accompanies a "Thermistor" library in the following github repository: [https://github.com/panStamp/thermistor](https://github.com/panStamp/thermistor).
@@ -86,7 +90,7 @@ See the example program that accompanies a "Thermistor" library in the following
 
 ## A Better Approach?
 
-This article does not use a library like that, for two reasons. Firstly, the code is really short. Secondly, a good data sheet will provide more complete information that may support better accuracy across a wider range of temperatures. The following shows part of a table for the LM05-103.
+This article does not use a library like that, for two reasons. Firstly, the code is really short. Secondly, a good data sheet will provide more complete information that may promote better accuracy. The following shows part of such a table for the LM05-103.
 
 ![Data Sheet excerpt #2](https://github.com/IowaDave/Thermistors/blob/main/images/DS_table_2.png)<br>
 **Table 2 Resistance at Different Temperatures**<br>
@@ -182,6 +186,31 @@ Again, the calculation consumes just one code statement
 
 Invert the result then subtract 273.15 to arrive at the temperature in degrees Celsius.
 
+### Calibrate to Improve the Accuracy
+OK, now we're reading a temperature from our apparatus. How close is it to the expected value?
+
+For example, the one in the photo reported 73.2&deg;F when my room temperature was 70&deg;F. The difference was 3.2&deg;, equal to about 1.77&degC. 
+
+One way to resolve this discrepancy is to calibrate the resistance value before calculating the temperature. 
+
+A short narrative can describe the general idea and yield a good approximation.
+
+Look at Table 2 again. 70&deg;F is near 21&deg;C. At 25&deg;C we expect to see a resistance of 10,000 Ohms. At 20&deg;C it rises to 12,560 Ohms, an increase of about 500 Ohms per degree of *decrease* in temperature.
+
+So, at 70&deg;F the resistance would be near $12,560 - 500 \approx 12,000$ Ohms. What does our voltage divider tell us? Print it out. The apparatus in the photo reported about 11,200 Ohms.
+
+The expected resistance of 12,000 is about 1.07 times the measured value of 11,200 near 70&deg;F. $\frac{12000}{11200}  \approx 1.07$. 
+
+Calibration is now simple: multiply the measured resistance times the ratio computed *for this particular thermistor*, 1.07. Insert this step to adjust the resistance value before calculating the temperature.
+
+```
+   temp *= 1.07; // apply calibration ratio
+```
+
+The ratio found at one temperature for one device may work well across the whole range of temperatures for that same device.
+
+However, the ratio is likely to be different for each device you might find in a bagful of the same part number. Simply re-perform the calibration calculation for each device.
+
 ## The Characteristic Curve
 
 Table 2 helps us to understand that business about &ldquo;25&#8451;/50&#8451;&rdquo; in Table 1. The Beta value given there, 4038, was calculated using data from resistances at the temperatures 25&#8451; and 50&#8451;. The calculation was:
@@ -223,15 +252,10 @@ The example code targets the range of temperatures likely to be encountered duri
 
 Similarly, a Beta for a winter range of &ndash;30&#8451; to +10&#8451; works out to be 3830. If one is going to use Beta for estimating a temperature within a certain target range, then why not work with the Beta value for that range?
 
-I found that customizing the Beta and reference inputs as described above worked well enough for my purposes. The thermistor reported temperatures within a degree or two more or less compared to other thermometers in my house. It's close enough to tell me whether I might want to wear a jacket outdoors.
-
-I mean, I'm a sensitive guy, but be reasonable. We're spending 39 cents here. Heck, all of my other thermometers give slightly different readings anyway.
-
-An old saying goes, "One thermometer always knows what the temperature is. Two or more, never do."
-
+I found that by customizing the Beta and reference inputs then calibrating the measured resistance, as described above, worked well enough for my purposes. The thermistor reported temperatures that agree to within a fraction of one degree compared to other thermometers I keep around the house.
 <hr>
 
-There are further ways to improve the temperature estimate for a thermistor.
+There are further ways to improve the temperature estimate corresponding to a measured resistance.
 
 ### Restrict the Range
 Take a look at the graph in Figure 1.
