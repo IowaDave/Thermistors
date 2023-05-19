@@ -119,10 +119,18 @@ Actually the ADC returns an integer representing that ratio multiplied by the &l
 
 What is that maximum value? It depends on the MPU. Processors found on older Arduino boards and on the ESP8266 device give 10-bit resolution, making the maximum 1023. ESP32 and the new Arduino Uno R4 support 12-bit resolution, making the maximum 8191. 
 
+The following code segment from the example program deals with this by defining the ADC_RESOLUTION to be either 10 bits or 12 bits. The macro ADC_MAX then represents the ADC resolution.
+
+```
+#define ADC_RESOLUTION 10
+// #define ADC_RESOLUTION 12
+#define ADC_MAX ( pow(2,ADC_RESOLUTION) - 1 )
+```
+
 The following defines the ADC measurement, $M_{ADC}$, for a 10-bit ADC such as that on the Nano shown in the photo.
 
 ```math
-M_{ADC} = 1023 \times  \frac{V_O}{V_I}
+M_{ADC} = ADC_MAX \times  \frac{V_O}{V_I}
 ```
 where:<br>
 &nbsp;&nbsp; $V_I$ is the input voltage applied to the thermistor, the same voltage that also powers the MCU.<br>
