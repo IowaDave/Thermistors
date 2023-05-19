@@ -127,10 +127,10 @@ The following code segment from the example program deals with this by defining 
 #define ADC_MAX ( pow(2,ADC_RESOLUTION) - 1 )
 ```
 
-The following defines the ADC measurement, $M_{ADC}$, for a 10-bit ADC such as that on the Nano shown in the photo.
+The following defines the ADC measurement, $M_{ADC}$.
 
 ```math
-M_{ADC} = ADC_MAX \times  \frac{V_O}{V_I}
+M_{ADC} = ADC\_MAX \times  \frac{V_O}{V_I}
 ```
 where:<br>
 &nbsp;&nbsp; $V_I$ is the input voltage applied to the thermistor, the same voltage that also powers the MCU.<br>
