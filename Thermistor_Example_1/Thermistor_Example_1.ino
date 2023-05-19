@@ -1,6 +1,6 @@
 /*
  * thermistor-example-1.ino
- * Obtain a temperature from a thermistor
+ * Obtain an accurate temperature from a thermistor
  *
  * Copyright (c) 2023 David G Sparks
  *
@@ -27,6 +27,15 @@
 // Nano accepts analog input on pin A7.
 // Modify as project requires for other boards.
 #define ANALOG_INPUT 7
+
+/*
+ * 10 bits for older AVR-based MPUs and ESP8266
+ * 12 bits for ESP32 and the new Arduino Uno R4
+ * 12 bits also for the new AVR Dx series of MPUs
+ */
+#define ADC_RESOLUTION 10
+// #define ADC_RESOLUTION 12
+#define ADC_MAX ( pow(2,ADC_RESOLUTION) - 1 )
 
 // Constants determined from the data sheet
 // targeting range of -10 C to +30 C
@@ -78,12 +87,12 @@ double getTempK ()
 {
   double temp = // a scratchpad variable
   ( 
-    (1023.0 / readAnalogPin ( ANALOG_INPUT ) )
+    (ADC_MAX / readAnalogPin ( ANALOG_INPUT ) )
      - 1)
     * R_FIXED; // begin with resistance in the thermistor
     
-  Serial.print("Resistance: ");
-  Serial.println(temp);   
+//  Serial.print("Resistance: ");
+//  Serial.println(temp);   
 
 // Device error could be as much as 10% above or below.
 // Adjust for a measured resistance 6% below actual.

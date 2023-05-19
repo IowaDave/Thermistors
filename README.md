@@ -7,7 +7,7 @@ This article puts a 39-cent thermistor to work as a digital thermometer. It need
 
 I target my example project to the range of outside air temperatures likely to be encountered during April and May in the upper midwestern U.S., &ndash;10&#8451; to 30&#8451;. This target will shape the code development.
 
-*Note to Readers: draft of 15 May 2023, a work in progress. Expect changes.
+*Note to Readers: draft of 19 May 2023, a work in progress. Expect changes.
 
 ## Contents
 
@@ -111,7 +111,15 @@ The math for this project triggered a flashback to 9th grade algebra. If you rea
 The example code incorporates a set of Big Three constants calculated beforehand. Then, just two code statements do the work. They are found in the subroutine named ```getTempK()```.
 
 ### Assess the Output of the Voltage Divider
-The output of the voltage divider is led to an analog input pin on the Arduino. The ```analogRead()``` function activates the analog-to-digital converter (ADC) peripheral inside the microcontroller to measure the voltage as a number between 0 and 1023. The following defines the ADC measurement, $M_{ADC}$ 
+The output of the voltage divider is led to an analog input pin on the Arduino. The ```analogRead()``` function activates the analog-to-digital converter (ADC) peripheral inside the microcontroller.
+
+The ADC calculates a ratio of the analog input voltage compared to a reference voltage. Most MCUs use their main power input voltage as the reference by default. 
+
+Actually the ADC returns an integer representing that ratio multiplied by the &ldquo;resolution&rdquo; of the ADC, that is, the maximum value that the ADC can return. 
+
+What is that maximum value? It depends on the MPU. Processors found on older Arduino boards and on the ESP8266 device give 10-bit resolution, making the maximum 1023. ESP32 and the new Arduino Uno R4 support 12-bit resolution, making the maximum 8191. 
+
+The following defines the ADC measurement, $M_{ADC}$, for a 10-bit ADC such as that on the Nano shown in the photo.
 
 ```math
 M_{ADC} = 1023 \times  \frac{V_O}{V_I}
