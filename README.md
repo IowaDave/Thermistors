@@ -136,7 +136,7 @@ where:<br>
 &nbsp;&nbsp; $V_I$ is the input voltage applied to the thermistor, the same voltage that also powers the MCU.<br>
 &nbsp;&nbsp; $V_O$ is the output voltage at the junction of $R1$ with $R2$.
 
-This measurement, $0 <= M_{ADC} <= ADC\_MAX$, can be reinterpreted as the output voltage, $V_O$. However, we do not really need to know the voltage. We need only to know the resistance in the thermistor. 
+This measurement, $0 <= M_{ADC} <= ADC\_MAX$ , can be reinterpreted as the output voltage, $V_O$. However, we do not really need to know the voltage. We need only to know the resistance in the thermistor. 
 
 ### Infer a Resistance
 First make sure that the voltage applied to the voltage divider, $V_I$ is the same as that powering the microcontroller. Then the ADC measurement can be converted directly into the resistance of the thermistor, knowing the values of $M_{ADC}$ and of the fixed-value resistor that follows it in series.
