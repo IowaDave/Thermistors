@@ -144,7 +144,7 @@ First make sure that the voltage applied to the voltage divider, $V_I$ is the sa
 With the thermistor in the $R1$ position of the voltage divider, the following equation solves for its resistance:
 
 ```math
-R1 = \left(\frac{1023}{M_{ADC}} - 1\right) \times R2
+R1 = \left(\frac{ADC\_MAX}{M_{ADC}} - 1\right) \times R2
 ```
 where $M_{ADC} > 0$.
 
@@ -154,16 +154,16 @@ This calculation occupies one code statement:
   // calculate thermistor resistance 
   // into a temporary variable
   double temp =
-    ( (1023.0 / readAnalogPin ( ANALOG_INPUT ) ) - 1 )
+    ( (ADC_MAX / readAnalogPin ( ANALOG_INPUT ) ) - 1 )
     * R_FIXED;
 ```
 
 The equation can be rearranged when the thermistor is in the R2 position:
 
 ```math
-R2 = \frac{M_{ADC} \times R1}{1023 - M_{ADC}}
+R2 = \frac{M_{ADC} \times R1}{ADC\_MAX - M_{ADC}}
 ```
-where $M_{ADC} < 1023$
+where $M_{ADC} <$ ADC_MAX.
 
 ### Calculate a Temperature
 The example code operates with a customized set of Big Three constants, for reasons explained below. Their values are:
