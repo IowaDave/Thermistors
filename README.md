@@ -7,7 +7,7 @@ This article puts a 39-cent thermistor to work as a digital thermometer. It need
 
 I target my example project to the range of outside air temperatures likely to be encountered during April and May in the upper midwestern U.S., &ndash;10&#8451; to 30&#8451;. This target will shape the code development.
 
-*Note to Readers: draft of 19 May 2023, a work in progress. Expect changes.
+*Note to Readers: draft of 22 May 2023, a work in progress. Expect changes.
 
 ## Contents
 
@@ -22,16 +22,16 @@ I target my example project to the range of outside air temperatures likely to b
 #### [Links](#links-1)
 
 ## Introduction
-Thermistors have been explained and demonstrated abundantly for temperature measurement. This writer has reviewed seven Arduino-style libraries. See the [links](#links-1) provided below.
+Thermistors have been explained and demonstrated abundantly for temperature measurement. This writer reviewed seven Arduino-style libraries. See the [links](#links-1) provided below.
 
-A reader can stop right there and go find how-tos online. Or stay here and go into it a little farther with me. 
+A reader can stop right there and go find how-tos online. Or stay here and go into it a little farther with me.
 
 Still with me? Here I go. How does one measure a temperature *accurately* using a thermistor?
 
 I'm curious to know more than merely how to cobble together an apparatus: how does a thermistor work, and how can one be calibrated to obtain reasonable accuracy?
 
 ## How It Works
-A thermistor is a kind of resistor having a special property: its resistance varies with high sensitiviy to changes in temperature.
+A thermistor is a kind of resistor having a special property: its resistance varies with high sensitivity to changes in temperature.
 
 Pairing a thermistor with a fixed-value resistor gives a voltage divider. For a certain, constant voltage input, $V_I$, the voltage output, $V_O$, increases or decreases in response to a decrease or increase in temperature.
 
@@ -73,15 +73,7 @@ The first line gives two of the quantities: a nominal impedance of 10K Ohms at a
 
 The third line gives the third quantity. It states that something called &ldquo;B Constant 25&#8451;/50&#8451;&rdquo; has a value near 4038. Another name for this number is &ldquo;Beta&rdquo;.
 
-A reference temperature, resistance at that temperature and the relevant Beta value are enough information to calculate a temperature with some of the more rudimentary open-source thermistor libraries available for the Arduino IDE. 
-
-By the way, the second line of Table 1 discloses that the actual resistance may be different, by as much as 10% above or below the intended level. In this case, it could be as low as 10K &ndash; 10% = 9,000 Ohms or as high as 10K + 10% = 11,000 Ohms. The Jameco folks are being honest here.
-
-That works out to accuracy within about 4 degrees at room temperature. There are two ways to improve it.
-
-Thermistors accurate to within 1% are available at higher prices. Now you're talking accuracy to within a half of a degree or less. Maybe the extra cost makes sense if you are mass-producing digital thermometers and wish to omit testing each part.
-
-Fortunately for us hobbyists who build things one at a time, it is easy to calibrate a single, inexpensive thermistor. How to do this will be explained below, in [The Code](#the-code) section.
+A reference temperature, the resistance at that temperature and the relevant Beta value are enough information to calculate a temperature with some of the more rudimentary open-source thermistor libraries available for the Arduino IDE. 
 
 ## Simple Usage
 See the example program that accompanies a "Thermistor" library in the following github repository: [https://github.com/panStamp/thermistor](https://github.com/panStamp/thermistor).
@@ -89,6 +81,24 @@ See the example program that accompanies a "Thermistor" library in the following
 **Know Your Thermistor!** That library expects the user to wire up an "NTC" type of thermistor that was designed for temperature measurement. (Those designed to deal with "inrush current" may be less suitable.) Wiring should follow the circuit diagram shown above. Finally, the code writer must supply the reference values given in the manufacturer's data sheet for the device being used.
 
 Using such a library with a particular thermistor, given only the Big Three quantities from the data sheet, or (worse) from a product description on a mass-merchant's web site, will give a result that *looks like* a temperature. (He shrugs.) It's a place to start.
+
+But how accurate is it?
+
+### Errors of Approximation 
+At best, the Big Three quantities can serve *to estimate* the temperature. There is bound to be some difference between the actual and the estimated temperatures. 
+
+Ways to improve the estimate are discussed in the next section.
+
+Also, the Big Three numbers describe an ideal example of the device. Individual devices will vary from the ideal, introducing another source of error.
+ 
+For example, the second line of Table 1 states that the actual resistance of a a Jameco LM05-103&nbsp;K part may differ by as much as 10% above or below the ideal level. In this case, it could be as low as 10K &ndash; 10% = 9,000 Ohms or as high as 10K + 10% = 11,000 Ohms. 
+
+That works out to accuracy within about 4 degrees at room temperature. There are two ways to improve it.
+
+Thermistors accurate to within 1% are available at higher prices. Now you're talking accuracy to within a half of a degree or less. Maybe the extra cost makes sense if you are mass-producing digital thermometers and wish to omit testing each part.
+
+Fortunately for us hobbyists who build things one at a time, it is easy to calibrate a single, inexpensive thermistor. How to do this will be explained below, in [The Code](#the-code) section.
+
 
 ## A Better Approach?
 
