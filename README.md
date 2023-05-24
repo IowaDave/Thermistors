@@ -30,9 +30,11 @@ A reader can stop right there and go find how-tos online. Or stay here and go in
 
 Still with me? Here I go. How does one measure a temperature *accurately* using a thermistor?
 
-What attracts me to thermistors is their simplicity compared to "intelligent" sensors such as the popular DS3231, DHT11 and DHT22 devices. Those things cost money and report their readings through serial communications that require specialized code libraries.
+What attracts me to thermistors is their simplicity compared to "intelligent" sensors marketed to hobbyists, such as the popular DS3231, DHT11 and DHT22 devices. 
 
-By contrast, an inexpensive can be read directly by a microcontroller without resort to a library.
+Those products cost money and report their readings through serial communications that require specialized code libraries.
+
+By contrast, an inexpensive thermistor can be read directly by a microcontroller without resort to a library.
 
 I'm curious to know more than merely how to cobble together an apparatus: how does a thermistor work, and how can one be calibrated to obtain reasonable accuracy?
 
