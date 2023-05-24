@@ -1,13 +1,14 @@
 # Thermistor-Thermometer
 Build an accurate digital thermometer with a simple, inexpensive sensor.
 
-![Thermistor with Arduino Nano](https://github.com/IowaDave/Thermistors/blob/main/images/Thermistor.jpg)
+![Thermistor with Arduino Nano](https://github.com/IowaDave/Thermistors/blob/main/images/Thermistor.jpg)<br>
+**Thermistor with an Arduino Nano-compatible controller**
 
 This article puts a 39-cent thermistor to work as a digital thermometer. It needs just a few lines of code.
 
 I target my example project to the range of outside air temperatures likely to be encountered during April and May in the upper midwestern U.S., &ndash;10&#8451; to 30&#8451;. This target will shape the code development.
 
-*Note to Readers: draft of 22 May 2023, a work in progress. Expect changes.
+*Note to Readers: draft of 24 May 2023, a work in progress. Expect changes.
 
 ## Contents
 
@@ -18,6 +19,7 @@ I target my example project to the range of outside air temperatures likely to b
 #### [Simple Usage](#simple-usage)
 #### [A Better Approach?](#a-better-approach?)
 #### [The Characteristic Curve](#the-characteristic-curve)
+#### [How I Could Be Wrong](#how-i-could-be-wrong)
 #### [Wonky Calculations](#wonky-calculations-1)
 #### [Links](#links-1)
 
@@ -27,6 +29,10 @@ Thermistors have been explained and demonstrated abundantly for temperature meas
 A reader can stop right there and go find how-tos online. Or stay here and go into it a little farther with me.
 
 Still with me? Here I go. How does one measure a temperature *accurately* using a thermistor?
+
+What attracts me to thermistors is their simplicity compared to "intelligent" sensors such as the popular DS3231, DHT11 and DHT22 devices. Those things cost money and report their readings through serial communications that require specialized code libraries.
+
+By contrast, an inexpensive can be read directly by a microcontroller without resort to a library.
 
 I'm curious to know more than merely how to cobble together an apparatus: how does a thermistor work, and how can one be calibrated to obtain reasonable accuracy?
 
@@ -85,9 +91,9 @@ Using such a library with a particular thermistor, given only the Big Three quan
 But how accurate is it?
 
 ### Errors of Approximation 
-At best, the Big Three quantities can serve *to estimate* the temperature. There is bound to be some difference between the actual and the estimated temperatures. 
+At best, the Big Three quantities can serve *to estimate* the temperature. The math involved will result in some difference between the actual and the estimated temperatures. 
 
-Ways to improve the estimate are discussed in the next section.
+Why that happens and ways to improve the estimate are discussed in the sections that follow.
 
 Also, the Big Three numbers describe an ideal example of the device. Individual devices will vary from the ideal, introducing another source of error.
  
@@ -97,7 +103,7 @@ That works out to accuracy within about 4 degrees at room temperature. There are
 
 Thermistors accurate to within 1% are available at higher prices. Now you're talking accuracy to within a half of a degree or less. Maybe the extra cost makes sense if you are mass-producing digital thermometers and wish to omit testing each part.
 
-Fortunately for us hobbyists who build things one at a time, it is easy to calibrate a single, inexpensive thermistor. How to do this will be explained below, in [The Code](#the-code) section.
+Fortunately for us hobbyists who build things one at a time, simply calibrating a single, inexpensive thermistor may restore it to near ideal performance. How to do this will be explained below, in [The Code](#the-code) section.
 
 
 ## A Better Approach?
@@ -328,6 +334,22 @@ See also the following link, which even provides an online calculator:
 Some of the github libraries listed below among the [Links](#links-1) implement the Steinhart-Hart equation. One of them might even calculate the coefficients for you!
 
 A unique benefit of the Steinhart-Hart equation is that it can be used with thermistors for which no data sheet is available. One carefully measures actual resistance of the thermistor at three different temperatures, spaced evenly at intervals reasonably far apart. The measurements allow a set of coefficients to be calculated for that thermistor.
+
+## How I Could Be Wrong
+I fell pretty confident about relatively simple steps such as refining the method of calculation and applying a calibration ratio, as described above.
+
+However, some things I do not know (yet) could make me change my mind. For the sake of completeness, consider the following.
+
+* **More rigorous testing could be called for.** I merely used other thermometers in the room as my reference. Proper apparatus probably involves immersing the thermistor in carefully heated or chilled fluids. That was not going to happen in my bride's kitchen!
+* **The calibration ratio might not be constant.** Just as the resistance itself changes as the thermistor's temperature changes, the *rate of change* in the resistance also might change. This drills down into the quantum nature of the materials forming the thermistor. Color me ignorant on that level.
+* **The fixed resistor changes with temperature, too.** If it is to be exposed to the same environment as the thermistor, then its variation will have some effect on the measurement. My study held the fixed resistor constant for the sake of convenience.
+* **Current may heat the thermistor.** My code example expects the thermistor circuit to remain energized continuously. Further minimizing current, e.g., with a higher-valued fixed resistor, or even switching it on only briefly to take measurements, may affect results. I chose not to pursue it, for simplicity's sake.
+* If I think of any more, I'll add them here.
+
+I plan to deploy the thermistor in the photo as an outside air temperature sensor. My purpose here can tolerate the risk of being somewhat wrong. Readings accurate to within a degree or two will satisfy my curiosity.
+
+Onward.
+
 
 ## Wonky Calculations
 Golly gee it felt funny to be back in 9th grade algebra class!
