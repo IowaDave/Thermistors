@@ -26,9 +26,9 @@ I target my example project to the range of outside air temperatures likely to b
 ## Introduction
 Thermistors have been explained and demonstrated abundantly for temperature measurement. This writer reviewed seven Arduino-style libraries. See the [links](#links-1) provided below.
 
-A reader can stop right there and go find how-tos online. Or stay here and go into it a little farther with me.
+A reader can stop right there and go find how-tos online. Or stay here and delve into it a little farther with me.
 
-Still with me? Here I go. How does one measure a temperature *accurately* using a thermistor?
+Still with me? Very well. How does one measure a temperature *accurately* using a thermistor?
 
 What attracts me to thermistors is their simplicity compared to "intelligent" sensors marketed to hobbyists, such as the popular DS3231, DHT11 and DHT22 devices. 
 
