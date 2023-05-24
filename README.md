@@ -30,7 +30,7 @@ A reader can stop right there and go find how-tos online. Or stay here and delve
 
 Still with me? Very well. How does one measure a temperature *accurately* using a thermistor?
 
-What attracts me to thermistors is their simplicity compared to "intelligent" sensors marketed to hobbyists, such as the popular DS3231, DHT11 and DHT22 devices. 
+What attracts me to thermistors is their simplicity compared to &ldquo;intelligent&rdquo; sensors marketed to hobbyists, such as the popular DS3231, DHT11 and DHT22 devices. 
 
 Those products cost money and report their readings through serial communications that require specialized code libraries.
 
