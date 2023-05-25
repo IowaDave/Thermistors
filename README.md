@@ -135,7 +135,11 @@ The ADC calculates a ratio of the analog input voltage compared to a reference v
 
 Actually the ADC returns an integer representing that ratio multiplied by the &ldquo;resolution&rdquo; of the ADC, that is, the maximum value that the ADC can return. 
 
-What is that maximum value? It depends on the MPU. Processors found on older Arduino boards and on the ESP8266 device give 10-bit resolution, making the maximum 1023. ESP32 and the new Arduino Uno R4 support 12-bit resolution, making the maximum 8191. 
+What is that maximum value? It depends on the MPU.
+
+* Processors found on older Arduino boards and on the ESP8266 device give 10-bit resolution, making the maximum 1023. 
+* SAMD21-based Arduinos including the Zero, Nano 33 IoT and MKR-series boards feature 12-bit ADCs, increasing the ADC maximum value to 8191. 
+* The new Arduino Uno R4 and the Expressif ESP32 boards support 12-bit resolution, also.
 
 The following code segment from the example program deals with this by defining the ADC_RESOLUTION to be either 10 bits or 12 bits. The macro ADC_MAX then represents the ADC resolution.
 
