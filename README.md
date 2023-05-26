@@ -39,7 +39,7 @@ By contrast, an inexpensive thermistor can be read directly by a microcontroller
 I'm curious to know more than merely how to cobble together an apparatus: how does a thermistor work, and how can one be calibrated to obtain reasonable accuracy?
 
 ## How It Works
-A thermistor is a kind of resistor having a special property: its resistance varies across a very wider range with high sensitivity to changes in temperature.
+A thermistor is a kind of resistor having a special property: its resistance varies across a very wide range with high sensitivity to changes in temperature.
 
 Pairing a thermistor with a fixed-value resistor gives a voltage divider. For a certain, constant voltage input, $V_I$, the voltage output, $V_O$, increases or decreases in response to a decrease or increase in temperature.
 
@@ -352,7 +352,7 @@ However, some things I do not know (yet) could make me change my mind. For the s
 * **Current may heat the thermistor.** My code example expects the thermistor circuit to remain energized continuously. Further minimizing current, e.g., with a higher-valued fixed resistor, or even switching it on only briefly to take measurements, may affect results. I chose not to pursue it, for simplicity's sake.
 * If I think of any more, I'll add them here.
 
-I plan to deploy the thermistor in the photo as an outside air temperature sensor. My purpose here can tolerate the risk of being somewhat wrong. Readings accurate to within a degree or two will satisfy my curiosity.
+What I want to explore next is how closely this thermistor follows changes in outside air temperature. I plan to place a thermistor on the back porch to compare it with the commercial digital thermometers already out there.
 
 Onward.
 
