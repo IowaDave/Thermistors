@@ -8,7 +8,7 @@ This article puts a 39-cent thermistor to work as a digital thermometer. It need
 
 I target my example project to the range of outside air temperatures likely to be encountered during April and May in the upper midwestern U.S., &ndash;10&#8451; to 30&#8451;. This target will shape the code development.
 
-*Note to Readers: draft of 24 May 2023, a work in progress. Expect changes.
+*Note to Readers: draft of 26 May 2023, a work in progress. Expect changes.
 
 ## Contents
 
@@ -24,11 +24,11 @@ I target my example project to the range of outside air temperatures likely to b
 #### [Links](#links-1)
 
 ## Introduction
-Thermistors have been explained and demonstrated abundantly for temperature measurement. This writer reviewed seven Arduino-style libraries. See the [links](#links-1) provided below.
+Many web pages exist to describe or demonstrate using thermistors for temperature measurement. For example, this writer reviewed seven Arduino-style libraries. See the [links](#links-1) provided below. 
 
-A reader can stop right there and go find how-tos online. Or stay here and delve into it a little farther with me.
+A reader can stop now and go sift through all those how-tos online. Or stay here and delve into it a little farther with me. 
 
-Still with me? Very well. How does one measure a temperature *accurately* using a thermistor?
+Because the articles I reviewed left me wondering: how does one measure a temperature *accurately* using a thermistor?
 
 What attracts me to thermistors is their simplicity compared to &ldquo;intelligent&rdquo; sensors marketed to hobbyists, such as the popular DS3231, DHT11 and DHT22 devices. 
 
@@ -39,7 +39,7 @@ By contrast, an inexpensive thermistor can be read directly by a microcontroller
 I'm curious to know more than merely how to cobble together an apparatus: how does a thermistor work, and how can one be calibrated to obtain reasonable accuracy?
 
 ## How It Works
-A thermistor is a kind of resistor having a special property: its resistance varies with high sensitivity to changes in temperature.
+A thermistor is a kind of resistor having a special property: its resistance varies across a very wider range with high sensitivity to changes in temperature.
 
 Pairing a thermistor with a fixed-value resistor gives a voltage divider. For a certain, constant voltage input, $V_I$, the voltage output, $V_O$, increases or decreases in response to a decrease or increase in temperature.
 
@@ -342,7 +342,7 @@ Some of the github libraries listed below among the [Links](#links-1) implement 
 A unique benefit of the Steinhart-Hart equation is that it can be used with thermistors for which no data sheet is available. One carefully measures actual resistance of the thermistor at three different temperatures, spaced evenly at intervals reasonably far apart. The measurements allow a set of coefficients to be calculated for that thermistor.
 
 ## How I Could Be Wrong
-I fell pretty confident about relatively simple steps such as refining the method of calculation and applying a calibration ratio, as described above.
+I feel pretty confident about relatively simple steps toward accuracy described above, such as refining the method of calculation and applying a calibration ratio.
 
 However, some things I do not know (yet) could make me change my mind. For the sake of completeness, consider the following.
 
