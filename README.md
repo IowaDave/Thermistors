@@ -227,7 +227,7 @@ Invert the result then subtract 273.15 to arrive at the temperature in degrees C
 ### Calibrate to Improve the Accuracy
 OK, now we're reading a temperature from our apparatus. How close is it to the expected value?
 
-For example, the one in the photo reported 73.2&deg;F when my room temperature was 70&deg;F. The difference was 3.2&deg;F. 
+For example, the one in the photo indicated 73.2&deg;F when my room temperature was 70&deg;F. The difference was 3.2&deg;F. 
 
 One way to resolve this discrepancy is to calibrate the resistance value before calculating the temperature. 
 
@@ -290,7 +290,7 @@ The example code targets the range of temperatures likely to be encountered duri
 
 Similarly, a Beta for a winter range of &ndash;30&#8451; to +10&#8451; works out to be 3830. If one is going to use Beta for estimating a temperature within a certain target range, then why not work with the Beta value for that range?
 
-I found that by customizing the Beta and reference inputs then calibrating the measured resistance, as described above, worked well enough for my purposes. The thermistor reported temperatures that agree to within a fraction of one degree compared to other thermometers I keep around the house.
+I found that customizing the Beta and reference inputs then calibrating the measured resistance, as described above, worked well enough for my purposes. The thermistor indicated temperatures that agree to within a fraction of one degree compared to other thermometers I keep around the house.
 <hr>
 
 There are further ways to improve the temperature estimate corresponding to a measured resistance.
