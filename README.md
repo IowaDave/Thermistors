@@ -8,8 +8,6 @@ This article puts a 39-cent thermistor to work as a digital thermometer. It need
 
 I target my example project to the range of outside air temperatures likely to be encountered during April and May in the upper midwestern U.S., &ndash;10&#8451; to 30&#8451;. This target will shape the code development.
 
-*Note to Readers: draft of 26 May 2023, a work in progress. Expect changes.
-
 ## Contents
 
 #### [Introduction](#introduction)
@@ -135,13 +133,13 @@ The ADC calculates a ratio of the analog input voltage compared to a reference v
 
 Actually the ADC returns an integer representing that ratio multiplied by the &ldquo;resolution&rdquo; of the ADC, that is, the maximum value that the ADC can return. 
 
-What is that maximum value? It depends on the MPU.
+What is that maximum value? It depends on the MCU.
 
 * Processors found on older Arduino boards and on the ESP8266 device give 10-bit resolution, making the maximum 1023. 
 * SAMD21-based Arduinos including the Zero, Nano 33 IoT and MKR-series boards feature 12-bit ADCs, increasing the ADC maximum value to 8191. 
 * The new Arduino Uno R4 and the Expressif ESP32 boards support 12-bit resolution, also.
 
-The following code segment from the example program deals with this by defining the ADC_RESOLUTION to be either 10 bits or 12 bits. The macro ADC_MAX then represents the ADC resolution.
+The following code segment from the example program deals with this by defining the ADC_RESOLUTION to be either 10 bits or 12 bits. The code example below specifies 10 bits. Your code should specify the one that corresponds to your device. The macro ADC_MAX then represents the ADC resolution.
 
 ```
 #define ADC_RESOLUTION 10
