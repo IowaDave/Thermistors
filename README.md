@@ -377,7 +377,7 @@ Now, we need a way to bring the ADC measurement into the calculation.
 #### Equation #2 ADC Measurement, $M_{ADC}$
 The data sheet has what we need. The example below is for the ATmega328P found on Arduino Nano or the Uno models through version R3.
 
-![](https://github.com/IowaDave/Thermistors/blob/dev/images/ADC_result.png)<br>
+![](https://github.com/IowaDave/Thermistors/blob/main/images/ADC_result.png)<br>
 *Source: ATmega328P data sheet*
 
 All we have to do is to rename the values in that equation to fit our purposes.
