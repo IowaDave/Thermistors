@@ -382,7 +382,7 @@ The data sheet has what we need. The example below is for the ATmega328P found o
 
 All we have to do is to rename the values in that equation to fit our purposes.
 
-* Where the data sheet refers to the voltage being measured by the ADC as $V_{IN}$. This is the same voltage that is being output by the voltage divider, which we are calling here $V_O$. They are two names for the same voltage because the output of the voltage divider is being supplied to the input pin of the ADC.
+* The data sheet refers to the voltage being measured by the ADC as $V_{IN}$. This is the same voltage that is being output by the voltage divider, which we are calling here $V_O$. They are two names for the same voltage because the output of the voltage divider is being supplied to the input pin of the ADC.
 * Likewise, the reference voltage named $V_{REF}$ in the data sheet is the same one we are calling $V_I$ because the circuit uses the same voltage also as the input to the voltage divider.
 * This article refers to the ADC measurement value as $M_{ADC}$, to distinguish it from the device that performs the measurement.
 
@@ -393,7 +393,7 @@ Rewrite the data sheet equation accordingly.
 ```math
 M_{ADC} = 1024 \times \frac{V_O}{V_I}
 ```
-when $V_I$ applied to the voltage divider is also the voltage used for reference in the ADC.
+To emphasize again, because it is important for making this work, $V_I$ applied to the voltage divider needs to be also the voltage $V_{REF}$ used for reference in the ADC.
 
 Rearrange #2
 
@@ -401,7 +401,7 @@ Rearrange #2
 V_O = \frac{V_I \times M_{ADC}}{1024}
 ```
 
-Substitute into #1
+Now we can substitute #2 into #1
 
 ```math
 \frac{V_I \times M_{ADC}}{1024} = \frac{V_I \times R2}{R1 + R2}
