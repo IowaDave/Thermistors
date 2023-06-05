@@ -6,7 +6,9 @@ Build an accurate digital thermometer with a simple, inexpensive sensor.
 
 This article puts a 39-cent thermistor to work as a digital thermometer. It needs just a few lines of code.
 
-I target my example project to the range of outside air temperatures likely to be encountered during April and May in the upper midwestern U.S., &ndash;10&#8451; to 30&#8451;. This target will shape the code development.
+My example project targets a specific thermistor in the range of outside air temperatures likely to be encountered during April and May in the upper midwestern U.S., &ndash;10&#8451; to 30&#8451;. 
+
+Such choices need to be taken into account for the sake of accuracy. A general approach is presented that may be applied to different thermistors or temperature ranges.
 
 ## Contents
 
@@ -22,7 +24,7 @@ I target my example project to the range of outside air temperatures likely to b
 #### [Links](#links-1)
 
 ## Introduction
-Many web pages exist to describe or demonstrate using thermistors for temperature measurement. For example, this writer reviewed seven Arduino-style libraries. See the [links](#links-1) provided below. 
+Many web pages exist to describe or demonstrate using thermistors for temperature measurement. For example, this writer reviewed seven different Arduino-style libraries. See the [links](#links-1) provided below.
 
 A reader can stop now and go sift through all those how-tos online. Or stay here and delve into it a little farther with me. 
 
@@ -135,8 +137,8 @@ Actually the ADC returns an integer representing that ratio multiplied by the &l
 
 What is that maximum value? It depends on the MCU.
 
-* Processors found on older Arduino boards and on the ESP8266 device give 10-bit resolution, making the maximum 1023. 
-* SAMD21-based Arduinos including the Zero, Nano 33 IoT and MKR-series boards feature 12-bit ADCs, increasing the ADC maximum value to 8191. 
+* Processors found on older Arduino boards and on the ESP8266 device give 10-bit resolution, making the maximum 1024. Actually, a 10-bit ADC can return values only in the range 0 through 1023.
+* SAMD21-based Arduinos including the Zero, Nano 33 IoT and MKR-series boards feature 12-bit ADCs, increasing the ADC maximum value to 4096, thus magnifying the range of possible return values to 0 through 4095. This makes the ADC able to sense smaller differences in voltage.
 * The new Arduino Uno R4 and the Expressif ESP32 boards support 12-bit resolution, also.
 
 The following code segment from the example program deals with this by defining the ADC_RESOLUTION to be either 10 bits or 12 bits. The code example below specifies 10 bits. Your code should specify the one that corresponds to your device. The macro ADC_MAX then represents the ADC resolution.
@@ -144,7 +146,7 @@ The following code segment from the example program deals with this by defining 
 ```
 #define ADC_RESOLUTION 10
 // #define ADC_RESOLUTION 12
-#define ADC_MAX ( pow(2,ADC_RESOLUTION) - 1 )
+#define ADC_MAX ( pow(2,ADC_RESOLUTION) )
 ```
 
 The following defines the ADC measurement, $M_{ADC}$.
@@ -156,7 +158,7 @@ where:<br>
 &nbsp;&nbsp; $V_I$ is the input voltage applied to the thermistor, the same voltage that also powers the MCU.<br>
 &nbsp;&nbsp; $V_O$ is the output voltage at the junction of $R1$ with $R2$.
 
-This measurement, $0 <= M_{ADC} <=$ ADC_MAX, can be reinterpreted as the output voltage, $V_O$. However, we do not really need to know the voltage. We need only to know the resistance in the thermistor. 
+This measurement, $0 < M_{ADC} <=$ ADC_MAX, can be reinterpreted as the output voltage, $V_O$. However, we do not really need to know the voltage. We need only to know the resistance in the thermistor. 
 
 ### Infer a Resistance
 First make sure that the voltage applied to the voltage divider, $V_I$ is the same as that powering the microcontroller. Then the ADC measurement can be converted directly into the resistance of the thermistor, knowing the values of $M_{ADC}$ and of the fixed-value resistor that follows it in series.
@@ -166,7 +168,7 @@ With the thermistor in the $R1$ position of the voltage divider, the following e
 ```math
 R1 = \left(\frac{ADC\_MAX}{M_{ADC}} - 1\right) \times R2
 ```
-where $M_{ADC} > 0$.
+where $M_{ADC} > 0$. Code should ensure this constraint, to avoid a divide-by-zero error.
 
 This calculation occupies one code statement:
 
@@ -183,7 +185,7 @@ The equation can be rearranged when the thermistor is in the R2 position:
 ```math
 R2 = \frac{M_{ADC} \times R1}{ADC\_MAX - M_{ADC}}
 ```
-where $M_{ADC} <$ ADC_MAX.
+where $M_{ADC} <$ ADC_MAX. Again, code should guard against a divide-by-zero error.
 
 ### Calculate a Temperature
 The example code operates with a customized set of Big Three constants, for reasons explained below. Their values are:
@@ -371,45 +373,55 @@ where: <br>
 &nbsp;&nbsp; R2 is the resistor following R1 in series, terminating at ground. 
 
 #### Equation #2 ADC Measurement, $M_{ADC}$
+This comes from the data sheet for the MCU being used. The example below is for the ATmega328P found on Arduino Nano or the Uno models through version R3.
+
+![](https://github.com/IowaDave/Thermistors/blob/main/images/ADC_result.png)<br>
+*Source: ATmega328P data sheet*
+
+The ADC on an ATmega328P has 10-bit resolution, making its maximum value 1024. This workup will use the value 1024. Replace it with 4096 for MCUs having 12-bit resolution.
+
+Note also where the data sheet refers to the voltage being measured by the ADC as $V_{IN}$. This is the same voltage that is being output by the voltage divider, which we are calling here $V_O$. 
+
+Rewrite the data sheet equation accordingly. 
 
 ```math
-M_{ADC} = 1023 \times \frac{V_O}{V_I}
+M_{ADC} = 1024 \times \frac{V_O}{V_I}
 ```
 when $V_I$ applied to the voltage divider is also the voltage used for reference in the ADC.
 
 Rearrange #2
 
 ```math
-V_O = \frac{V_I \times M_{ADC}}{1023}
+V_O = \frac{V_I \times M_{ADC}}{1024}
 ```
 
 Substitute into #1
 
 ```math
-\frac{V_I \times M_{ADC}}{1023} = \frac{V_I \times R2}{R1 + R2}
+\frac{V_I \times M_{ADC}}{1024} = \frac{V_I \times R2}{R1 + R2}
 ```
 
 Invert and rearrange
 
 ```math
-\frac{R1}{V_I \times R2} + \frac{R2}{V_I \times R2} = \frac{1023}{V_I \times M_{ADC}}
+\frac{R1}{V_I \times R2} + \frac{R2}{V_I \times R2} = \frac{1024}{V_I \times M_{ADC}}
 ```
 
 Multiply by $V_I$
 
 ```math
-\frac{R1}{R2} + \frac{R2}{R2} = \frac{1023}{M_{ADC}}
+\frac{R1}{R2} + \frac{R2}{R2} = \frac{1024}{M_{ADC}}
 ```
 
 Rearrange and simplify
 
 ```math
-\frac{R1}{R2}= \frac{1023}{M_{ADC}} - 1
+\frac{R1}{R2}= \frac{1024}{M_{ADC}} - 1
 ```
 
 Multiply by R2
 ```math
-R1 = R2 \times \left(\frac{1023}{M_{ADC}} - 1\right)
+R1 = R2 \times \left(\frac{1024}{M_{ADC}} - 1\right)
 ```
 
 ### Calculating Temperature from Resistance Using Beta

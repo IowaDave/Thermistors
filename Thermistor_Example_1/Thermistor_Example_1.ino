@@ -21,7 +21,11 @@
  *
  * This code was written for and tested on 
  * an Arduino Nano development board based on the
- * ATmega328P microcontroller..
+ * ATmega328P microcontroller.
+ * 
+ * 05June2023 changed ADC top value constant to 1024
+ * to conform with datasheet. Added a test to avoid
+ * a zero result from the ADC to prevent a runtime error.
  */
 
 // Nano accepts analog input on pin A7.
@@ -35,7 +39,7 @@
  */
 #define ADC_RESOLUTION 10
 // #define ADC_RESOLUTION 12
-#define ADC_MAX ( pow(2,ADC_RESOLUTION) - 1 )
+#define ADC_MAX ( pow(2,ADC_RESOLUTION) )
 
 // Constants determined from the data sheet
 // targeting range of -10 C to +30 C
@@ -80,7 +84,9 @@ uint16_t readAnalogPin( uint8_t pin)
     delay(5);
   }
 //  Serial.println(adcAverage);
-  return adcAverage / NUM_SAMPLES;
+  adcAverage /= NUM_SAMPLES;
+  if (adcAverage == 0) adcAverage = 1;
+  return adcAverage;
 }
 
 double getTempK ()
