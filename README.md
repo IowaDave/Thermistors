@@ -370,21 +370,23 @@ V_O = V_I \times \frac{R2}{R1 + R2}
 ```
 where: <br>
 &nbsp;&nbsp; $V_I$ is the voltage fed into Resistor R1 <br>
-&nbsp;&nbsp; R2 is the resistor following R1 in series, terminating at ground. 
+&nbsp;&nbsp; R2 is the resistor following R1 in series, terminating at ground.
+
+Now, we need a way to bring the ADC measurement into the calculation.
 
 #### Equation #2 ADC Measurement, $M_{ADC}$
-This comes from the data sheet for the MCU being used. The example below is for the ATmega328P found on Arduino Nano or the Uno models through version R3.
+The data sheet has what we need. The example below is for the ATmega328P found on Arduino Nano or the Uno models through version R3.
 
 ![](https://github.com/IowaDave/Thermistors/blob/dev/images/ADC_result.png)<br>
 *Source: ATmega328P data sheet*
 
+All we have to do is to rename the values in that equation to fit our purposes.
+
+*Where the data sheet refers to the voltage being measured by the ADC as $V_{IN}$. This is the same voltage that is being output by the voltage divider, which we are calling here $V_O$. They are two names for the same voltage because the output of the voltage divider is being supplied to the input pin of the ADC.
+*Likewise, the reference voltage named $V_{REF}$ in the data sheet is the same one we are calling $V_I$ because the circuit uses the same voltage also as the input to the voltage divider.
+*This article refers to the ADC measurement value as $M_{ADC}$, to distinguish it from the device that performs the measurement.
+
 The ADC on an ATmega328P has 10-bit resolution, making its maximum value 1024. This workup will use the value 1024. Replace it with 4096 for MCUs having 12-bit resolution.
-
-Note also where the data sheet refers to the voltage being measured by the ADC as $V_{IN}$. This is the same voltage that is being output by the voltage divider, which we are calling here $V_O$.
-
-They are two names for the same voltage because the output of the voltage divider is being supplied to the input pin of the ADC.
-
-This article refers to the ADC measurement value as $M_{ADC}$.
 
 Rewrite the data sheet equation accordingly. 
 
