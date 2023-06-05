@@ -375,12 +375,16 @@ where: <br>
 #### Equation #2 ADC Measurement, $M_{ADC}$
 This comes from the data sheet for the MCU being used. The example below is for the ATmega328P found on Arduino Nano or the Uno models through version R3.
 
-![](https://github.com/IowaDave/Thermistors/blob/main/images/ADC_result.png)<br>
+![](https://github.com/IowaDave/Thermistors/blob/dev/images/ADC_result.png)<br>
 *Source: ATmega328P data sheet*
 
 The ADC on an ATmega328P has 10-bit resolution, making its maximum value 1024. This workup will use the value 1024. Replace it with 4096 for MCUs having 12-bit resolution.
 
-Note also where the data sheet refers to the voltage being measured by the ADC as $V_{IN}$. This is the same voltage that is being output by the voltage divider, which we are calling here $V_O$. 
+Note also where the data sheet refers to the voltage being measured by the ADC as $V_{IN}$. This is the same voltage that is being output by the voltage divider, which we are calling here $V_O$.
+
+They are two names for the same voltage because the output of the voltage divider is being supplied to the input pin of the ADC.
+
+This article refers to the ADC measurement value as $M_{ADC}$.
 
 Rewrite the data sheet equation accordingly. 
 
