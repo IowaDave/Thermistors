@@ -382,9 +382,9 @@ The data sheet has what we need. The example below is for the ATmega328P found o
 
 All we have to do is to rename the values in that equation to fit our purposes.
 
-*Where the data sheet refers to the voltage being measured by the ADC as $V_{IN}$. This is the same voltage that is being output by the voltage divider, which we are calling here $V_O$. They are two names for the same voltage because the output of the voltage divider is being supplied to the input pin of the ADC.
-*Likewise, the reference voltage named $V_{REF}$ in the data sheet is the same one we are calling $V_I$ because the circuit uses the same voltage also as the input to the voltage divider.
-*This article refers to the ADC measurement value as $M_{ADC}$, to distinguish it from the device that performs the measurement.
+* Where the data sheet refers to the voltage being measured by the ADC as $V_{IN}$. This is the same voltage that is being output by the voltage divider, which we are calling here $V_O$. They are two names for the same voltage because the output of the voltage divider is being supplied to the input pin of the ADC.
+* Likewise, the reference voltage named $V_{REF}$ in the data sheet is the same one we are calling $V_I$ because the circuit uses the same voltage also as the input to the voltage divider.
+* This article refers to the ADC measurement value as $M_{ADC}$, to distinguish it from the device that performs the measurement.
 
 The ADC on an ATmega328P has 10-bit resolution, making its maximum value 1024. This workup will use the value 1024. Replace it with 4096 for MCUs having 12-bit resolution.
 
