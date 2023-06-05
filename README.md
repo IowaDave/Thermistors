@@ -20,6 +20,7 @@ Such choices need to be taken into account for the sake of accuracy. A general a
 #### [A Better Approach?](#a-better-approach?)
 #### [The Characteristic Curve](#the-characteristic-curve)
 #### [How I Could Be Wrong](#how-i-could-be-wrong-1)
+#### [What I Think I Got Right](#what-i-think-i-got-right-1)
 #### [Wonky Calculations](#wonky-calculations-1)
 #### [Links](#links-1)
 
@@ -352,9 +353,22 @@ However, some things I do not know (yet) could make me change my mind. For the s
 * **Current may heat the thermistor.** My code example expects the thermistor circuit to remain energized continuously. Further minimizing current, e.g., with a higher-valued fixed resistor, or even switching it on only briefly to take measurements, may affect results. I chose not to pursue it, for simplicity's sake.
 * If I think of any more, I'll add them here.
 
-What I want to explore next is how closely this thermistor follows changes in outside air temperature. I plan to place a thermistor on the back porch to compare it with the commercial digital thermometers already out there.
+## What I Think I Got Right
+My goal was to operationalize the thermistor as an Outside Air Temperature (OAT) sensor. This required a few minor modifications.
 
-Onward.
+I extended the &ldquo;legs&rdquo; of the thermistor with an 8-foot (2-meter) long pair of wires, ran the wires out through a window and secured the device inside an empty coffee can.
+
+![](https://github.com/IowaDave/Thermistors/blob/main/images/OAT_outdoors.jpg)<br>
+**Wires to thermistor inside coffee can outdoors**
+
+The code and the indoor breadboard were modified to replace serial output with an LCD display.
+
+![](https://github.com/IowaDave/Thermistors/blob/main/images/OAT_outdoors.jpg)<br>
+**OAT displayed on an LCD indoors**
+
+Happily, this little homemade sensor consistently indicates between the readings obtained by two commercially manufactured thermometers nearby. At the moment pictured above, one of those read 62.1 degrees, the other 63.2.
+
+Onward!
 
 
 ## Wonky Calculations

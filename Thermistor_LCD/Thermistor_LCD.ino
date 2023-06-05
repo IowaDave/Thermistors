@@ -21,12 +21,13 @@
  *
  * This code was written for and tested on 
  * an Arduino Nano development board based on the
- * ATmega328P microcontroller.
- * 
- * 05June2023 changed ADC top value constant to 1024
- * to conform with datasheet. Added a test to avoid
- * a zero result from the ADC to prevent a runtime error.
+ * ATmega328P microcontroller..
  */
+
+// LCD library includes
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27,16,2);  // set the LCD address to 0x27 for a 16 chars and 2 line display
 
 // Nano accepts analog input on pin A7.
 // Modify as project requires for other boards.
@@ -59,17 +60,19 @@ double getTempF (void);
 uint16_t readAnalogPin( uint8_t );
 
 void setup() {
+  lcd.init();                      // initialize the lcd 
+  lcd.backlight();
+  lcd.setCursor(0,0);
+  lcd.print("OAT: ");
 
-  delay(2000); 
-  Serial.begin(9600);
-  while (!Serial) { ; }
-  Serial.println("Serial started.");
 }
 
 void loop() {
-  delay(1000);
-  Serial.print("tempF: ");
-  Serial.println(dtostrf(getTempF(), 6, 1, vbgString));
+  lcd.setCursor(5,0);
+  lcd.print(dtostrf(getTempF(), 6, 1, vbgString));
+  lcd.write(0b11011111); // degrees symbol
+  lcd.print("F");
+  delay(14000);
 }
 
 
@@ -83,9 +86,7 @@ uint16_t readAnalogPin( uint8_t pin)
     adcAverage += analogRead(pin);
     delay(5);
   }
-//  Serial.println(adcAverage);
   adcAverage /= NUM_SAMPLES;
-  // ensure ADC reading > zero
   if (adcAverage == 0) adcAverage = 1;
   return adcAverage;
 }
@@ -98,9 +99,6 @@ double getTempK ()
      - 1)
     * R_FIXED; // begin with resistance in the thermistor
     
-//  Serial.print("Resistance: ");
-//  Serial.println(temp);   
-
 // Device error could be as much as 10% above or below.
 // Adjust for a measured resistance 6% below actual.
    temp *= 1.07; // apply correction factor
@@ -110,8 +108,6 @@ double getTempK ()
     1 / 
     ( (1.0/REF_TEMP) - log(REF_RESIST/temp)/BETA )
   ); // temperature in degrees K
-//  Serial.print("Temp K: ");
-//  Serial.println(temp);
   return temp;
 }
 
