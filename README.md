@@ -363,7 +363,7 @@ I extended the &ldquo;legs&rdquo; of the thermistor with an 8-foot (2-meter) lon
 
 The code and the indoor breadboard were modified to replace serial output with an LCD display.
 
-![](https://github.com/IowaDave/Thermistors/blob/main/images/OAT_outdoors.jpg)<br>
+![](https://github.com/IowaDave/Thermistors/blob/main/images/OAT_indoors.jpg)<br>
 **OAT displayed on an LCD indoors**
 
 Happily, this little homemade sensor consistently indicates between the readings obtained by two commercially manufactured thermometers nearby. At the moment pictured above, one of those read 62.1 degrees, the other 63.2.
